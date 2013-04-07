@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>random</title>
+</head>
+
+<body>
+<div id="capture" style="width: 100%; height: 100%; border: 1px solid black; background: #DDF">
+	<h1>Random Value Generator</h1>
+	<p>
+	move the mouse around in this box
+	</p>
+	<div id="values"></div>
+	<div id="chars"></div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+var values = document.getElementById( "values" );
+var chars = document.getElementById( "chars" );
+
+var alphabet = "efghijklmnopqrstuvwxyz0123456789";
+var bits = 0;
+var currentNumber = 0;
+
+function add_number( num ) {
+	var newChar = alphabet[ num ];
+	var span = document.createElement( "span" );
+	span.innerHTML = newChar;
+	chars.appendChild( span );
+}
+
+function add_bit( bit ) {
+	var span = document.createElement( "span" );
+	span.innerHTML = bit + " ";
+	values.appendChild( span );
+	bits ++;
+	currentNumber = currentNumber * 2 + bit;
+	if( bits == 5 ) {
+		add_number( currentNumber );
+		bits = 0;
+		currentNumber = 0;
+	}
+}
+function add_value( val ) {
+	val = Math.abs( val ) % 2;
+	add_bit( val );
+}
+
+var maxX = 0, minX = 0;
+var directionX = 1;
+
+var maxY = 0, minY = 0;
+var directionY = 1;
+
+var mouseMoveHandler = function(e) {
+	var x = e.pageX;
+	var y = e.pageY;
+	if( directionX == 1 ) {
+		if( x >= maxX ) {
+			maxX = x;
+		} else {
+			add_value( maxX );
+			minX = x;
+			directionX = 0;
+		}
+	} else {
+		if( x <= minX ) {
+			minX = x;
+		} else {
+			add_value( minX );
+			maxX = x;
+			directionX = 1;
+		}
+	}
+	if( directionY == 1 ) {
+		if( y >= maxY ) {
+			maxY = y;
+		} else {
+			add_value( maxY );
+			minY = y;
+			directionY = 0;
+		}
+	} else {
+		if( y <= minY ) {
+			minY = y;
+		} else {
+			add_value( minY );
+			maxY = y;
+			directionY = 1;
+		}
+	}
+};
+$(document.body).mousemove( mouseMoveHandler );
+</script>
+</body>
+</html>

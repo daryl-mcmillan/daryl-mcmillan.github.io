@@ -1,0 +1,19 @@
+body {
+	background-color: black;
+	margin: 0;
+	font-family: verdana, arial, sans-serif;
+}
+header {
+	background-color: white;
+	margin: 0;
+	padding: 2em;
+}
+footer {
+	background-color: white;
+	color: white;
+}
+div.body {
+	margin: 1em;
+	padding: 1em;
+	background-color: white;
+}

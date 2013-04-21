@@ -1,10 +1,11 @@
 ---
 layout: default
-title: super index page
+title: alternatetext.org
 ---
 
-
-test
+Apps
 ----
 
-this is a test
+- [random](/apps/random/)
+
+
